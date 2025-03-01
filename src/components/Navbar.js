@@ -533,16 +533,18 @@ const Navbar = () => {
               )
           )
         ),
+      // Mobile menu section with improved consistency
       isMobileMenuOpen &&
         React.createElement(
           "div",
           {
             className:
-              "xl:hidden bg-white absolute top-full left-0 w-full z-50",
+              "xl:hidden bg-white absolute top-full left-0 w-full z-50 shadow-lg border-t border-gray-100",
           },
           React.createElement(
             "div",
-            { className: "flex flex-col p-3 sm:p-4 gap-1 sm:gap-2" },
+            { className: "flex flex-col p-4 gap-2" },
+            // Main navigation items
             navItems.map((item) => {
               const IconComponent = item.icon;
               const isActive = location.pathname === item.href;
@@ -551,95 +553,116 @@ const Navbar = () => {
                 {
                   key: item.name,
                   to: item.href,
-                  className: `py-2 px-3 sm:px-4 rounded-lg flex items-center gap-3 text-sm sm:text-base ${
+                  className: `py-2.5 px-4 rounded-lg flex items-center gap-3 ${
                     isActive
-                      ? "bg-[#e31b53] text-white"
-                      : "hover:bg-[#e31b53]/20"
+                      ? "bg-[#e31b53] text-white font-medium"
+                      : "hover:bg-[#e31b53]/10 text-gray-800"
                   }`,
                   onClick: () => setIsMobileMenuOpen(false),
                 },
-                React.createElement(IconComponent, { size: 16 }),
+                React.createElement(IconComponent, {
+                  size: 18,
+                  className: `${isActive ? "text-white" : "text-[#e31b53]"}`,
+                }),
                 React.createElement("span", null, item.name)
               );
             }),
-            React.createElement(
-              "div",
-              { className: "flex justify-between pt-2 sm:pt-4" },
 
-              React.createElement(
-                Link,
-                { to: "/wishlist" },
-                React.createElement(
-                  "button",
-                  { className: "group p-2" },
-                  React.createElement(Heart, {
-                    size: 20,
-                    className: "group-hover:scale-110 transition-all ",
-                  })
-                )
-              ),
-              React.createElement(
-                "button",
-                { className: "group p-2" },
-                React.createElement(Bell, {
-                  size: 20,
-                  className: "group-hover:scale-110 transition-all",
-                })
-              )
+            // Divider
+            React.createElement("div", {
+              className: "h-px bg-gray-200 my-2",
+            }),
+
+            // Secondary actions with consistent styling
+            React.createElement(
+              Link,
+              {
+                to: "/wishlist",
+                className:
+                  "py-2.5 px-4 rounded-lg flex items-center gap-3 hover:bg-[#e31b53]/10 text-gray-800",
+              },
+              React.createElement(Heart, {
+                size: 18,
+                className: "text-[#e31b53]",
+              }),
+              React.createElement("span", null, "Wishlist")
             ),
             React.createElement(
-              "div",
-              { className: "pt-2 sm:pt-4" },
+              "button",
+              {
+                className:
+                  "py-2.5 px-4 rounded-lg flex items-center gap-3 hover:bg-[#e31b53]/10 text-gray-800 w-full text-left",
+              },
+              React.createElement(Bell, {
+                size: 18,
+                className: "text-[#e31b53]",
+              }),
+              React.createElement("span", null, "Notifications")
+            ),
+
+            // Divider
+            React.createElement("div", {
+              className: "h-px bg-gray-200 my-2",
+            }),
+
+            // Profile dropdown section
+            React.createElement(
+              "button",
+              {
+                className:
+                  "w-full flex justify-between items-center py-2.5 px-4 rounded-lg text-gray-800 hover:bg-[#e31b53]/10",
+                onClick: () =>
+                  setIsMobileProfileDropdownOpen(!isMobileProfileDropdownOpen),
+              },
               React.createElement(
                 "div",
-                { className: "pt-2 sm:pt-4" },
-                React.createElement(
-                  "button",
-                  {
-                    className:
-                      "w-full flex justify-between items-center py-2 px-3 sm:px-4 rounded-lg text-sm sm:text-base hover:bg-[#e31b53]/20",
-                    onClick: () =>
-                      setIsMobileProfileDropdownOpen(
-                        !isMobileProfileDropdownOpen
-                      ),
-                  },
+                { className: "flex items-center gap-3" },
+                React.createElement(User, {
+                  size: 18,
+                  className: "text-[#e31b53]",
+                }),
+                React.createElement("span", null, "Profile")
+              ),
+              isMobileProfileDropdownOpen
+                ? React.createElement(ChevronUp, {
+                    size: 18,
+                    className: "text-gray-500",
+                  })
+                : React.createElement(ChevronDown, {
+                    size: 18,
+                    className: "text-gray-500",
+                  })
+            ),
+
+            // Profile dropdown items with animated transition
+            isMobileProfileDropdownOpen &&
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "mt-1 space-y-1 pl-4 border-l-2 border-[#e31b53]/30 ml-3 animate-fadeIn",
+                },
+                profileDropdownItems.map((item) =>
                   React.createElement(
-                    "div",
-                    { className: "flex items-center gap-3" },
-                    React.createElement(User, { size: 16 }),
-                    React.createElement("span", null, "Profile")
-                  ),
-                  isMobileProfileDropdownOpen
-                    ? React.createElement(ChevronUp, { size: 16 })
-                    : React.createElement(ChevronDown, { size: 16 })
-                ),
-                isMobileProfileDropdownOpen &&
-                  React.createElement(
-                    "div",
+                    Link,
                     {
+                      key: item.name,
+                      to: item.href,
                       className:
-                        "ml-6 sm:ml-8 mt-1 sm:mt-2 space-y-1 sm:space-y-2",
+                        "flex items-center gap-3 py-2.5 px-4 text-gray-700 hover:bg-[#e31b53]/10 rounded-lg",
+                      onClick: () => {
+                        setIsMobileMenuOpen(false);
+                        setIsMobileProfileDropdownOpen(false);
+                      },
                     },
-                    profileDropdownItems.map((item) =>
-                      React.createElement(
-                        Link,
-                        {
-                          key: item.name,
-                          to: item.href,
-                          className:
-                            "flex items-center gap-3 py-2 px-3 sm:px-4 text-sm sm:text-base hover:bg-[#e31b53]/20 rounded-lg",
-                          onClick: () => {
-                            setIsMobileMenuOpen(false);
-                            setIsMobileProfileDropdownOpen(false);
-                          },
-                        },
-                        React.createElement(item.icon, { size: 16 }),
-                        React.createElement("span", null, item.name)
-                      )
-                    )
+                    React.createElement(item.icon, {
+                      size: 18,
+                      className: "text-gray-500",
+                    }),
+                    React.createElement("span", null, item.name)
                   )
+                )
               )
-            )
           )
         ),
       React.createElement(BedtimeModal, {

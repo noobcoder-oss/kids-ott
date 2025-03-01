@@ -493,7 +493,7 @@ const Home = () => {
             "div",
             {
               className:
-                "w-21 bg-white text-[#e31b53] px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#e31b53]/30",
+                "w-21 bg-white text-[#e31b53] px-4 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#e31b53]/30",
             },
             React.createElement(
               "p",

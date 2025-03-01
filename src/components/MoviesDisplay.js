@@ -334,7 +334,7 @@ const MovieDisplay = () => {
           {
             onClick: () => setIsSettingsOpen(!isSettingsOpen),
             className:
-              "absolute top-4 right-4 z-50 bg-black/50 p-2 rounded-full sm:hidden",
+              "absolute top-4 right-4 bg-black/50 p-2 rounded-full sm:hidden",
           },
           React.createElement(Settings, { className: "w-6 h-6 text-white" })
         )
